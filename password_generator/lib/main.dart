@@ -74,19 +74,21 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildGeneratedPasswordText(),
-            SizedBox(height: 20),
-            _buildPasswordLengthSlider(),
-            SizedBox(height: 20),
-            _buildOptionsCheckboxes(),
-            SizedBox(height: 20),
-            _buildGenerateButton(),
-            SizedBox(height: 10),
-            _buildCopyButton(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildGeneratedPasswordText(),
+              SizedBox(height: 20),
+              _buildPasswordLengthSlider(),
+              SizedBox(height: 20),
+              _buildOptionsCheckboxes(),
+              SizedBox(height: 20),
+              _buildGenerateButton(),
+              SizedBox(height: 10),
+              _buildCopyButton(),
+            ],
+          ),
         ),
       ),
     );
