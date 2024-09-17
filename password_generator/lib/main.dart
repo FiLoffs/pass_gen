@@ -211,7 +211,7 @@ class PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
         backgroundColor: Colors.lightBlue[200],
         foregroundColor: Colors.black,
       ),
-      child: const Text('Згенерувати новий пароль'),
+      child: const FittedBox(child: Text('Згенерувати новий пароль')),
     );
   }
 
@@ -225,7 +225,7 @@ class PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
         backgroundColor: Colors.green[100],
         foregroundColor: Colors.black,
       ),
-      child: const Text('Скопіювати пароль'),
+      child: const FittedBox(child: Text('Скопіювати пароль')),
     );
   }
 
