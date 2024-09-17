@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:flutter/services.dart';
 
 void main() {
-  runApp(PasswordGeneratorApp());
+  runApp(const PasswordGeneratorApp());
 }
 
 class PasswordGeneratorApp extends StatelessWidget {
+  const PasswordGeneratorApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,18 +17,20 @@ class PasswordGeneratorApp extends StatelessWidget {
         primarySwatch: Colors.lightBlue, // Neutral lightBlue color scheme
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: PasswordGeneratorScreen(),
+      home: const PasswordGeneratorScreen(),
     );
   }
 }
 
 class PasswordGeneratorScreen extends StatefulWidget {
+  const PasswordGeneratorScreen({super.key});
+
   @override
-  _PasswordGeneratorScreenState createState() =>
-      _PasswordGeneratorScreenState();
+  PasswordGeneratorScreenState createState() =>
+      PasswordGeneratorScreenState();
 }
 
-class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
+class PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
   String _password = ''; // To store the generated password
   double _passwordLength = 6; // Default password length
   bool _includeUppercase = true; // Enable/disable uppercase letters
@@ -42,17 +46,20 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
   void _generatePassword() {
     String chars = ''; // String to hold characters for password generation
 
-    if (_includeUppercase)
+    if (_includeUppercase) {
       chars += _upperCaseLetters; // Add uppercase letters if enabled
-    if (_includeLowercase)
+    }
+    if (_includeLowercase) {
       chars += _lowerCaseLetters; // Add lowercase letters if enabled
+    }
     if (_includeNumbers) chars += _numbers; // Add numbers if enabled
-    if (_includeSpecialCharacters)
+    if (_includeSpecialCharacters) {
       chars += _specialCharacters; // Add special characters if enabled
+    }
 
     if (chars.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Необхідно зробити вибір!')),
+        const SnackBar(content: Text('Необхідно зробити вибір!')),
       );
       return;
     }
@@ -69,7 +76,7 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
     return Scaffold(
       backgroundColor: Colors.white, // Neutral white background
       appBar: AppBar(
-        title: Text('Генератор паролів'),
+        title: const Text('Генератор паролів'),
         backgroundColor: Colors.lightBlue[200], // lightBlue app bar
       ),
       body: Padding(
@@ -79,13 +86,13 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _buildGeneratedPasswordText(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildPasswordLengthSlider(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildOptionsCheckboxes(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildGenerateButton(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               _buildCopyButton(),
             ],
           ),
@@ -99,18 +106,20 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
     return Center(
       child: Column(
         children: [
-          Text(
+          const Text(
             'Згенерований пароль:',
             style: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
           ),
-          SizedBox(height: 10),
-          SelectableText(
-            _password.isNotEmpty ? _password : 'Пароль буде тут',
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.lightBlue[800],
-              fontWeight: FontWeight.w600,
+          const SizedBox(height: 10),
+          FittedBox(
+            child: SelectableText(
+              _password.isNotEmpty ? _password : 'Пароль буде тут',
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.lightBlue[800],
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],
@@ -125,7 +134,7 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
       children: [
         Text(
           'Довжина пароля: ${_passwordLength.toInt()}',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
         Slider(
           value: _passwordLength,
@@ -150,7 +159,7 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
       children: [
         CheckboxListTile(
           activeColor: Colors.lightBlue[200],
-          title: Text('Великі літери'),
+          title: const Text('Великі літери'),
           value: _includeUppercase,
           onChanged: (bool? value) {
             setState(() {
@@ -160,7 +169,7 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
         ),
         CheckboxListTile(
           activeColor: Colors.lightBlue[200],
-          title: Text('Малі літери'),
+          title: const Text('Малі літери'),
           value: _includeLowercase,
           onChanged: (bool? value) {
             setState(() {
@@ -170,7 +179,7 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
         ),
         CheckboxListTile(
           activeColor: Colors.lightBlue[200],
-          title: Text('Цифри'),
+          title: const Text('Цифри'),
           value: _includeNumbers,
           onChanged: (bool? value) {
             setState(() {
@@ -180,7 +189,7 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
         ),
         CheckboxListTile(
           activeColor: Colors.lightBlue[200],
-          title: Text('Спеціальні символи'),
+          title: const Text('Спеціальні символи'),
           value: _includeSpecialCharacters,
           onChanged: (bool? value) {
             setState(() {
@@ -197,12 +206,12 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
     return ElevatedButton(
       onPressed: _generatePassword,
       style: ElevatedButton.styleFrom(
-        textStyle: TextStyle(fontSize: 18),
-        padding: EdgeInsets.symmetric(vertical: 15),
+        textStyle: const TextStyle(fontSize: 18),
+        padding: const EdgeInsets.symmetric(vertical: 15),
         backgroundColor: Colors.lightBlue[200],
         foregroundColor: Colors.black,
       ),
-      child: Text('Згенерувати новий пароль'),
+      child: const Text('Згенерувати новий пароль'),
     );
   }
 
@@ -211,12 +220,12 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
     return ElevatedButton(
       onPressed: _copyToClipboard,
       style: ElevatedButton.styleFrom(
-        textStyle: TextStyle(fontSize: 18),
-        padding: EdgeInsets.symmetric(vertical: 15),
+        textStyle: const TextStyle(fontSize: 18),
+        padding: const EdgeInsets.symmetric(vertical: 15),
         backgroundColor: Colors.green[100],
         foregroundColor: Colors.black,
       ),
-      child: Text('Скопіювати пароль'),
+      child: const Text('Скопіювати пароль'),
     );
   }
 
@@ -225,7 +234,7 @@ class _PasswordGeneratorScreenState extends State<PasswordGeneratorScreen> {
     Clipboard.setData(
         ClipboardData(text: _password)); // Copy the password to clipboard
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Пароль скопійовано!')),
+      const SnackBar(content: Text('Пароль скопійовано!')),
     );
   }
 }
